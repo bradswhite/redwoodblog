@@ -1,4 +1,57 @@
+@import url("https://rsms.me/inter/inter.css");
+
+@tailwind base;
+
+:root {
+  @apply scroll-smooth font-display antialiased;
+}
+
 body {
+  @apply bg-white;
+  scrollbar-color: #00000080 transparent;
+  scrollbar-width: auto;
+}
+
+body.dark {
+  @apply bg-gray-900;
+  scrollbar-color: #ffffffb3 transparent;
+  scrollbar-width: auto;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-black/50 dark:bg-white/70;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-black/60 dark:hover:bg-white/80;
+}
+
+button {
+  /* Disables tap highlight color on Chrome */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Input darkmode fix for checkbox / radio */
+.dark [type="checkbox"]:checked,
+.dark [type="radio"]:checked {
+  background-color: currentColor;
+}
+
+@tailwind components;
+@tailwind utilities;
+
+
+/* *** Default Styling *** */
+/*body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 ul {
@@ -47,4 +100,4 @@ input.error, textarea.error {
 }
 .flex-between button {
   display: inline;
-}
+}*/

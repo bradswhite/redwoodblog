@@ -1,6 +1,12 @@
+import { useState, useEffect } from 'react';
+
 import { Link, routes } from '@redwoodjs/router';
 
 import { useAuth } from 'src/auth';
+
+import NavigationMenu from 'src/components/UIComponents/NavigationMenu';
+import Button from 'src/components/UIComponents/shared/Button';
+import Login from 'src/components/Login';
 
 type BlogLayoutProps = {
   children?: React.ReactNode
@@ -9,30 +15,46 @@ type BlogLayoutProps = {
 const BlogLayout = ({ children }: BlogLayoutProps) => {
   const { isAuthenticated, currentUser, logOut } = useAuth();
 
+  const [ seed, setSeed ] = useState(Math.random());
+
   return <>
-    <header>
-      <div className='flex-between'>
-        <h1><Link to={routes.home()}>Redwood Blog</Link></h1>
+    <header className='flex flex-wrap items-center justify-between mx-auto py-6 px-20'>
+      <h1 className='text-2xl font-bold text-gray-900 dark:text-gray-100'>
+        <Link to={routes.home()}>Boilerplate App Code</Link>
+      </h1>
+
+      <NavigationMenu links={[
+        { title: 'About', href: '/about' },
+        { title: 'Contact', href: '/contact' }
+      ]} />
+
+      {/*<nav>
+        <ul>
+          <li><Link to={routes.about()}>About</Link></li>
+          <li><Link to={routes.contact()}>Contact</Link></li>
+        </ul>
+      </nav>*/}
+
+      <div className='text-gray-900 dark:text-gray-100'>
         {isAuthenticated ? (
           <div>
             <span>Logged in as {currentUser.email}</span>{' '}
-            <button type='button' onClick={logOut}>
+              <Button onClick={logOut}>
               Logout
-            </button>
+            </Button>
           </div>
         ) : (
-          <Link to={routes.login()}>Login</Link>
+          <Login setSeed={setSeed}>
+            <Button>Login</Button>
+          </Login>
         )}
-        <nav>
-          <ul>
-            <li><Link to={routes.about()}>About</Link></li>
-            <li><Link to={routes.contact()}>Contact</Link></li>
-          </ul>
-        </nav>
       </div>
     </header>
-    <main>{children}</main>
+
+    <main className='w-screen overflow-x-hidden'>
+      {children}
+    </main>
   </>
 }
 
-export default BlogLayout
+export default BlogLayout;

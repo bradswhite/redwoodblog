@@ -23,7 +23,9 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ articles }: CellSuccessProps<ArticlesQuery>) => {
-  return articles.map(article => (
-    <Article key={article.id} article={article} />
-  ));
+  return <div className='px-20 py-10 grid flex gap-10 grid-cols-3'>
+    {articles.map(article => (
+      <Article key={article.id} article={article} />
+    ))}
+  </div>;
 }
